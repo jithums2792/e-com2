@@ -5,11 +5,12 @@ const productRoute = require('./routers/product.rout');
 const categoryRoute = require('./routers/category.rout');
 const subcategoryRoute = require('./routers/subcategory.route');
 const attributeRoute = require('./routers/attribute.route');
+require('dotenv').config();
 const app = express();
 app.use(cors());
-const PORT = 3000;
+const PORT = process.env.PORT;
 
-app.listen(PORT, () => { console.log('server running') });
+app.listen(PORT || 3000, () => { console.log('server running') });
 
 app.use(express.json({limit: '50mb'}))
 
