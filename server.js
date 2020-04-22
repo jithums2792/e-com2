@@ -13,9 +13,6 @@ app.listen(PORT, () => { console.log('server running') });
 
 app.use(express.json({limit: '50mb'}))
 
-app.get('', (req, res)=>{
-    res.send('sample server');
-})
 app.use('/api/product', productRoute);
 app.use('/api/category', categoryRoute);
 app.use('/api/subcategory', subcategoryRoute);
