@@ -5,14 +5,19 @@ const product = new schema({
    name: { type: String, required: true},
    image: {type: String},
    discription: { type: String, required: true},
-   price: { type: String, required: true},
-   offerprice: { type: String},
+   price: { type: Number, required: true},
+   unit: {type: String},
+   offerprice: { type: Number},
    badge: { type: String},
    badgeclass: { type: String},
    category: { type: String, required: true},
    subcategory: { type: String},
    attributes: { type: Array},
-   quantity: {type: String}
+   quantity: {type: Number},
+   owner: {type: String},
+   createdAt: {type: Date},
+   updatedprice: {type: Number},
+   num: {type: Number}
 });
 
 const productModel = mongoose.model('products',product);

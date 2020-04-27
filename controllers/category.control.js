@@ -15,7 +15,8 @@ async function getSubcategoyByCatId(req, res) {
 }
 async function addCategory(req, res) {
     const newCategory = new categoryModel({
-        name: req.body.name
+        name: req.body.name,
+        icon: req.body.icon
     });
     newCategory.save().then(resp => {
         res.json(resp);
