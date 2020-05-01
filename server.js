@@ -14,7 +14,7 @@ const checkoutRouter = require('./routers/checkout.route')
 require('dotenv').config();
 const app = express();
 app.use(cors({
-    origin: 'localhost:8100'
+    origin: '*'
 }));
 const PORT = process.env.PORT;
 
