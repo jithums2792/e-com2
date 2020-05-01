@@ -13,7 +13,9 @@ const orderrouter = require('./routers/order.route')
 const checkoutRouter = require('./routers/checkout.route')
 require('dotenv').config();
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: 'localhost:8100'
+}));
 const PORT = process.env.PORT;
 
 app.listen(PORT || 3000, () => { console.log('server running') });
