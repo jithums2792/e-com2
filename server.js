@@ -10,6 +10,7 @@ const userRoute = require('./routers/user.router')
 const loginRouter = require('./routers/login.router')
 const bannerrouter = require('./routers/banner.router')
 const orderrouter = require('./routers/order.route')
+const checkoutRouter = require('./routers/checkout.route')
 require('dotenv').config();
 const app = express();
 app.use(cors());
@@ -28,3 +29,6 @@ app.use('/api/user', userRoute)
 app.use('/api/banner',bannerrouter)
 app.use('/api/order',orderrouter)
 app.use('/api/login', loginRouter)
+app.use('/api/checkout', checkoutRouter)
+
+
