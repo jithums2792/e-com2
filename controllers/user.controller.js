@@ -28,7 +28,7 @@ async function updateCartById(req, res) {
     await userModel.findOneAndUpdate({_id: req.params.id},{cart: req.body}, {new: true}).then(resp => res.json(resp))
 }
 async function getCArtById(req, res) {
-    await userModel.findById(req.params.id).then(resp => res.json(resp.cart))
+    await userModel.findById(req.params.id).then(resp => res.json(resp))
 }
 async function deleteUserById(req, res) {
     userModel.findOneAndDelete({_id: req.params.id}).then(resp => { res.json(resp)})
