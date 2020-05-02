@@ -5,7 +5,7 @@ const user = new schema({
    name: {type: String, required: true},
    password: {type: String},
    email: {type: String},
-   cart: {type:Array, unique: true},
+   cart: [],
    address: {type: Array},
    createdAt: {type: Date}
 
