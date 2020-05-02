@@ -27,6 +27,9 @@ async function editUserById(req, res) {
 async function updateCartById(req, res) {
     await userModel.findOneAndUpdate({_id: req.params.id},{cart: req.body}, {new: true}).then(resp => res.json(resp))
 }
+async function getCArtById(req, res) {
+    await userModel.findById(req.params.id).then(resp => res.json(resp.cart))
+}
 async function deleteUserById(req, res) {
     userModel.findOneAndDelete({_id: req.params.id}).then(resp => { res.json(resp)})
 }
@@ -40,6 +43,7 @@ exports.getAllUser = getAllUser;
 exports.getUserById = getUserById;
 exports.addUser = addUser;
 exports.editUserById = editUserById;
+exports.getCArtById = getCArtById;
 exports.updateCartById = updateCartById;
 exports.deleteUserById = deleteUserById;
 exports.loginUser = loginUser;
