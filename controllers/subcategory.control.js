@@ -5,8 +5,15 @@ async function getAllSubcategory(req, res) {
     res.json(subcategory);
 }
 async function getSubcategoryById(req, res) {
-    const subcategory = await subcategoryModel.find({pcat: req.params.id});
-    res.json(subcategory);
+                                            ///CHANGE
+    const subcategory = await subcategoryModel.findById(req.params.id).then(
+        reslt=>{
+            res.json(reslt)
+        }
+    ).catch(err=>{
+         res.json([{}]) 
+    });
+    ;
 }
 async function addSubcategory(req, res) {
     const newSubcategory = new subcategoryModel({
@@ -18,13 +25,15 @@ async function addSubcategory(req, res) {
     })
 }
 async function updateSubcategoryById(req, res) {
-    subcategoryModel.findByIdAndUpdate(req.params.id, req.body).then(resp => {
+    subcategoryModel.findByIdAndUpdate(req.params.id, req.body,).then(resp => {
         res.json(resp);
     })
 }
 async function deleteSubcategoryById(req, res) {
+    //console.log(req.params.id)
     subcategoryModel.findByIdAndDelete(req.params.id).then(resp => {
         res.json(resp);
+        //console.log(resp)
     })
 }
 

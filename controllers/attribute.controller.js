@@ -5,8 +5,15 @@ async function getAllAttribute(req, res) {
     res.json(attribute);
 }
 async function getAttributeById(req, res) {
-    const attribute = await attributeModel.findById(req.params.id);
-    res.json(attribute);
+    const attribute = await attributeModel.findById(req.params.id).then(resp=>{
+        res.json(resp); 
+    }).catch(err=>{
+        res.json({
+            "options": [ ], "name": "",
+            
+        }) 
+    })
+    
 }
 async function addAttribute(req, res) {
     const newattribute = new attributeModel({

@@ -6,7 +6,13 @@ async function getAllCategory(req, res) {
     res.json(categories);
 }
 async function getCategoryById(req, res) {
-    const category = await categoryModel.findById(req.params.id);
+    const category = await categoryModel.findById(req.params.id).then(
+        reslt=>{
+            res.json(reslt)
+        }
+    ).catch(err=>{
+         res.json([{}]) 
+    });
     res.json(category);
 }
 async function getSubcategoyByCatId(req, res) {

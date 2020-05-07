@@ -12,6 +12,7 @@ router.post('', (req, res) => {
     subcategoryController.addSubcategory(req, res);
 })
 router.patch('/:id', (req, res) => {
+    console.log(req.params.id)
     subcategoryController.updateSubcategoryById(req, res);
 })
 router.delete('/:id', (req, res) => {

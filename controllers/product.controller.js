@@ -34,8 +34,10 @@ async function addProduct(req, res) {
         updatedprice: req.body.updatedprice,
         num: req.body.num,
         quantity: req.body.quantity,
+        attributes:req.body.attributes,
         createdAt: new Date()
     });
+    console.log(product)
     await product.save();
     res.json(product);
 }
