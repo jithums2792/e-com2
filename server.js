@@ -12,9 +12,7 @@ const bannerrouter = require('./routers/banner.router')
 const orderrouter = require('./routers/order.route')
 require('dotenv').config();
 const app = express();
-app.use(cors({
-    origin: 'http://localhost:4200/'
-}));
+app.use(cors());
 const PORT = process.env.PORT;
 
 app.listen(PORT || 3000, () => { console.log('server running') });
