@@ -1,24 +1,30 @@
 const userModel = require('../models/user.model');
 const md5 = require('md5')
 
+function success(res, data) {
+    res.json({status: 'Success', data: data})
+}
+function error(res, data) {
+    res.json({status: 'Error', data: data})
+}
+
 async function getAllUser(req, res) {
-    await userModel.find().then(resp => {
-        res.json(resp);
-    })
+    await userModel.find().then(data => {
+        success(res, data)
+    }).catch(err => error(res, err))
 }
 async function getUserById(req, res) {
-    userModel.findOne({_id: req.params.id}).then( resp => { res.json(resp)})
+    userModel.findOne({_id: req.params.id}).then( data => success(res, data)).catch(err => error(res, err))
 }
 async function addUser(req, res) {
     const newUser = new userModel({
         name: req.body.name,
         email: req.body.email,
         password: md5(req.body.password),
-        cart: req.body.cart,
         address: req.body.address,
         createdAt: new Date()
     });
-    await newUser.save().then(resp => res.json(resp));
+    newUser.save().then(data => success(res, data)).catch(err => error(res, err));
 }
 async function editUserById(req, res) {
     const user = req.body;
@@ -31,12 +37,12 @@ async function getCArtById(req, res) {
     await userModel.findOne({_id: req.params.id}).then(resp => res.json(resp.cart))
 }
 async function deleteUserById(req, res) {
-    userModel.findOneAndDelete({_id: req.params.id}).then(resp => { res.json(resp)})
+    userModel.findOneAndDelete({_id: req.params.id}).then(data => success(res, data)).catch(err => error(res, err))
 }
 async function loginUser(req, res) {
     const email = req.body.email
     const password = md5(req.body.password)
-    userModel.findOne({email: email, password: password}).then(resp => { res.json(resp)}).catch(err => {res.json(err)});
+    userModel.findOne({email: email, password: password}).then(data => success(res, data)).catch(err => error(res, err));
 }
 
 exports.getAllUser = getAllUser;

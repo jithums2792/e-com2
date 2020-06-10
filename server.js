@@ -13,7 +13,7 @@ const orderrouter = require('./routers/order.route')
 require('dotenv').config();
 const app = express();
 app.use(cors({
-    origin: '*'
+    origin: 'http://localhost:4200/'
 }));
 const PORT = process.env.PORT;
 
