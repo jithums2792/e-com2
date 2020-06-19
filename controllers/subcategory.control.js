@@ -1,44 +1,25 @@
 const subcategoryModel = require('../models/subcategory.model');
 
-async function getAllSubcategory(req, res) {
-    const subcategory = await subcategoryModel.find();
-    res.json(subcategory);
-}
-async function getSubcategoryById(req, res) {
-                                            ///CHANGE
-    const subcategory = await subcategoryModel.findById(req.params.id).then(
-        reslt=>{
-            res.json(reslt)
-        }
-    ).catch(err=>{
-         res.json([{}]) 
-    });
-    ;
-}
-async function addSubcategory(req, res) {
+
+function successHandler(res,data){res.json({status: 'success', data: data})}
+function errorHandler(res,data){res.json({status: 'error', data: data})}
+
+function getAllSubcategory(req, res) {subcategoryModel.find().then(data => successHandler(res,data)).catch(err => errorHandler(res,err))}
+function getSubcategoryById(req, res) {subcategoryModel.findById(req.params.id).then(data => successHandler(res,data)).catch(err => errorHandler(res,err))}
+function addSubcategory(req, res) {
     const newSubcategory = new subcategoryModel({
         name: req.body.name,
         pcat: req.body.pcat
     });
-    newSubcategory.save().then(resp => {
-        res.json(resp);
-    })
+    newSubcategory.save().then(data => successHandler(res,data)).catch(err => errorHandler(res,err))
 }
-async function updateSubcategoryById(req, res) {
-    subcategoryModel.findByIdAndUpdate(req.params.id, req.body,).then(resp => {
-        res.json(resp);
-    })
-}
-async function deleteSubcategoryById(req, res) {
-    //console.log(req.params.id)
-    subcategoryModel.findByIdAndDelete(req.params.id).then(resp => {
-        res.json(resp);
-        //console.log(resp)
-    })
-}
+function updateSubcategoryById(req, res) {subcategoryModel.findByIdAndUpdate(req.params.id, req.body).then(data => successHandler(res,data)).catch(err => errorHandler(res,err))}
+function deleteSubcategoryById(req, res) {subcategoryModel.findByIdAndDelete(req.params.id).then(data => successHandler(res,data)).catch(err => errorHandler(res,err))}
+function getAllSubcategoryBycatname(req,res) {subcategoryModel.find({pcat: req.params.name}).then(data => successHandler(res,data)).catch(err => errorHandler(res,err))}
 
 exports.getAllSubcategory = getAllSubcategory;
 exports.getSubcategoryById = getSubcategoryById;
 exports.addSubcategory = addSubcategory;
 exports.updateSubcategoryById = updateSubcategoryById;
 exports.deleteSubcategoryById = deleteSubcategoryById;
+exports.getAllSubcategoryBycatname = getAllSubcategoryBycatname
